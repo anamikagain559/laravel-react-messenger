@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Group;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,10 +19,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'avatar',
         'name',
         'email',
+        'is_admin',
+        'email_verified_at',
         'password',
     ];
+
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +51,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+public function groups(){
+    return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id');
+
+}
+
+
 }

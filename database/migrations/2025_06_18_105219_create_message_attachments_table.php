@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('message_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id1')->constrained('users');
-             $table->foreignId('user_id2')->constrained('users'); 
+            $table->foreignId('message_id')->constrained('messages');
+            $table->string('name',255);
+            $table->string('path', 1024);
+            $table->string('mime', 255);
+            $table->integer('size');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('message_attachments');
     }
 };
