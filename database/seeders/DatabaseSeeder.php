@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
         'name' => 'john doe',
-        'email' => 'john@example.com',
+        'email' => 'jane@example.com',
         'password' => bcrypt('password'),
         
         
@@ -54,13 +54,13 @@ $conversations =$messages->groupBy(function ($message) {
             return collect([$message->sender_id, $message->receiver_id])->sort()->implode('-');
         })->map(function ($groupedMessages){
             return [
-                'sender_id' => $groupedMessages->first()->sender_id,
-                'receiver_id' => $groupedMessages->first()->receiver_id,
+                'user_id1' => $groupedMessages->first()->sender_id,
+                'user_id2' => $groupedMessages->first()->receiver_id,
                 'last_message_id' => $groupedMessages->last()->id,
                 'created_at' =>new Carbon(),
                 'updated_at' => new Carbon(),
             ];
-        })->value();
+        })->values();
 
       Conversation::insertOrIgnore($conversations->toArray());
 }

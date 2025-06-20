@@ -17,9 +17,9 @@ class MessageFactory extends Factory
     public function definition(): array
 
     {
-        $senderID =$this->faker->randomElement(0,1);
+       $senderID = $this->faker->randomElement([0, 1]);
          if($senderID === 0 ){
-            $senderID = $this->faker->randomElement(\App\Models\User::where('sender_id','!=',1)->pluck('id')->toArray());
+            $senderID = $this->faker->randomElement(\App\Models\User::where('id','!=',1)->pluck('id')->toArray());
         $receiverID =1;
          }
          else{

@@ -4,9 +4,12 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Message;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Group extends Model
-{
+{   
+
+       use HasFactory;
        protected $fillable = [
         'name',
         'description',
@@ -17,7 +20,7 @@ class Group extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'group_user');
+        return $this->belongsToMany(User::class, 'group_users');
     }
 
     public function messages()
